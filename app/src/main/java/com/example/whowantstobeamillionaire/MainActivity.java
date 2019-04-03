@@ -1,6 +1,7 @@
 package com.example.whowantstobeamillionaire;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +11,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     decimalFormat = new DecimalFormat(pattern);
     //
 
-
     n = 0;
     cash = 0;
     radioGroup = findViewById(R.id.radioGroup);
@@ -49,24 +47,37 @@ public class MainActivity extends AppCompatActivity {
     setUp(n);
   }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
+    reset();
+  }
+
   public void btnPressed(View v) {
     int radioID = radioGroup.getCheckedRadioButtonId();
     answer = findViewById(radioID);
 
     if (query.checkAnswer(n, answer.getText().toString())) {
       cash = query.calculateAnswer(n, cash);
-      Toast.makeText(this, "Correct! " + cash, Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
       n++;
-      radioGroup.clearCheck();
-      setUp(n);
+      if (n < query.count()) {
+        radioGroup.clearCheck();
+        setUp(n);
+      } else {
+        startActivity(new Intent(this, Win.class));
+      }
     } else {
       startActivity(new Intent(this, GameOver.class));
-      n = 0;
-      cash = 0;
-      radioGroup.clearCheck();
-      setUp(0);
     }
 
+  }
+
+  private void reset() {
+    n = 0;
+    cash = 0;
+    radioGroup.clearCheck();
+    setUp(0);
   }
 
   private void setUp(int index) {
