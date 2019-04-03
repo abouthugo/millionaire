@@ -1,7 +1,6 @@
 package com.example.whowantstobeamillionaire;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    //
     pattern = "$###,###.###";
     decimalFormat = new DecimalFormat(pattern);
-    //
 
     n = 0;
     cash = 0;
@@ -53,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     reset();
   }
 
+  /**
+   * Event listener for when "Submit" is pressed
+   * @param v
+   */
   public void btnPressed(View v) {
     int radioID = radioGroup.getCheckedRadioButtonId();
     answer = findViewById(radioID);
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+  /**
+   * Resets the game variables
+   */
   private void reset() {
     n = 0;
     cash = 0;
@@ -80,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
     setUp(0);
   }
 
+  /**
+   * Builds the game out of the variables
+   * @param index the question number
+   */
   private void setUp(int index) {
     question_ref.setText(query.getQuestion(index));
     choices = query.getChoices(index);
@@ -89,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Sets up the radio button's references 
+   */
   private void setRadios() {
     radios = new RadioButton[4];
     radios[0] = findViewById(R.id.option_1);

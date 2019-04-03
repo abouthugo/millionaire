@@ -21,20 +21,24 @@ public class Helper {
           "Ask the audience", "Phone-a-friend", "50:50", "Double Dip"},
       {"\"In what children's game are participants chased by someone designated \"It\"?",
           "Tag", "Simon Says", "Charades", "Hopscotch"},
-      {"On a radio, stations are changed by using what control?", "Tuning", "Volume", "Bass", "Treble"},
+      {"On a radio, stations are changed by using what control?", "Tuning", "Volume", "Bass",
+          "Treble"},
       {"Which material is most dense?", "Silver", "Styrofoam", "Butter", "Gold"},
-      {"Which state in the United States is largest by area?",  "Alaska", "California", "Texas", "Hawaii"},
+      {"Which state in the United States is largest by area?", "Alaska", "California", "Texas",
+          "Hawaii"},
       {"What is Aurora Borealis commonly known as?", "Fairy Dust",
           "Northern Lights", "Book of ages", "a Game of Thrones main character"},
       {"Galileo was an Italian astronomer who", "developed the telescope",
           "discovered four satellites of Jupiter",
           "discovered that the movement of pendulum produces a regular time measurement",
           "All of the above"},
-      {"Exposure to sunlight helps a person improve his health because", "the infrared light kills bacteria in the body",
+      {"Exposure to sunlight helps a person improve his health because",
+          "the infrared light kills bacteria in the body",
           "resistance power increases",
           "the pigment cells in the skin get stimulated and produce a healthy tan",
           "the ultraviolet rays convert skin oil into Vitamin D"},
-      {"Sir Thomas Fearnley Cup is awarded to", "a club or a local sport association for remarkable achievements",
+      {"Sir Thomas Fearnley Cup is awarded to",
+          "a club or a local sport association for remarkable achievements",
           "amateur athlete, not necessarily an Olympian",
           "National Olympic Committee for outstanding work",
           "None of the above"},
@@ -42,6 +46,12 @@ public class Helper {
   };
   private int[] answers = {2, 4, 2, 4, 4, 4, 1, 1, 4, 1, 2, 4, 4, 1, 2};
 
+  /**
+   * Calculates the weight of the answer according to its index and current value
+   * @param index the question index
+   * @param currentScore the current cash the user has obtained
+   * @return the new score
+   */
   public int calculateAnswer(int index, int currentScore) {
     if (index <= 2) {
       return currentScore + 100;
@@ -54,19 +64,39 @@ public class Helper {
     }
   }
 
+  /**
+   * Checks if the answer provided is the correct one
+   * @param index the index of the questions
+   * @param answer the answer provided
+   * @return whether or not the answer is correct
+   */
   public Boolean checkAnswer(int index, String answer) {
     return questions[index][answers[index]].equals(answer);
   }
 
+  /**
+   * Retrieves a question by its index
+   * @param index index of the question
+   * @return a string which is the question
+   */
   public String getQuestion(int index) {
     return questions[index][0];
   }
 
+  /**
+   * Retrieves the choices for a particular question
+   * @param index of the question
+   * @return an array of Strings that represents the choices
+   */
   public String[] getChoices(int index) {
     return Arrays.copyOfRange(questions[index], 1, questions[index].length);
   }
 
-  public int count(){
+  /**
+   * The number of questions available
+   * @return the number of questions
+   */
+  public int count()   {
     return questions.length;
   }
 }
